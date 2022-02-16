@@ -1,42 +1,81 @@
 //  Variáveis de controle 
 const LINK_API = "https://mock-api.driven.com.br/api/v4/buzzquizz/";
 
-//Pegando os quizes do servidor e imprimindo (chamar a função para ela funcionar)
+//Pegando os quizes do servidor e imprimindo
 function pegarQuizzesDoServidor() {
     const promessa = axios.get(`${LINK_API}quizzes`);
     promessa.then((respostaServidor) => {
         CriarEstruturaHTML(respostaServidor);
     });
-    //criar função para o catch?
+    promessa.catch();
 };
 
-//mudar a estrutura do html, essa estrutura é para testes
+window.onload = pegarQuizzesDoServidor();
 
+//mudar a estrutura do html
 function CriarEstruturaHTML(respostaServidor) {
-    const ul = document.querySelector("ul");
-    ul.innerHTML = "";
+    console.log(respostaServidor);
+    const section = document.querySelector("section");
+    section.innerHTML = "";
     for (i = 0; i < respostaServidor.data.length; i++) {
-        ul.innerHTML += `<p>${respostaServidor.data[i].title}</p>
-        <img src="${respostaServidor.data[i].image}" alt="${respostaServidor.data[i].image}">`
+        section.innerHTML += `
+        <article onclick="abrirTela2(this)">
+        <img class="img-tela-1" src="${respostaServidor.data[i].image}" alt="${respostaServidor.data[i].image}">
+        <p class="titulo-quiz-tela-1">${respostaServidor.data[i].title}</p>
+        </article>`
     }
 }
 
 //criação de quizzes
-/* let quizCriado = {
+
+let objQuizz = {
     title: '',
     image: '',
     questions: [],
     levels: []
 };
 
-const requisicao = axios.post(`${LINK_API}quizzes`, quizCriado);
-requisicao.then(criarQuiz);
+function receberInput (){
+    let titulo = document.getElementById("tituloQuizz").value;
+    let img = document.getElementById("imgQuiz").value;
+    let qtdePerguntas = document.getElementById("qtdePerguntasQuizz").value;
+    let niveis = document.getElementById("niveisQuizz").value;
+    objQuizz.title = titulo;
+    objQuizz.image = img;
+    objQuizz.questions.length = qtdePerguntas;
+    objQuizz.levels.length = niveis;
+    validacaoDeQuizzes();
+}
 
-function criarQuiz (respostaServidor2){
-    console.log(respostaServidor2);
-} */
+function validacaoDeQuizzes(){
+    let i = 0;
+    if (objQuizz.title.length >= 20 && objQuizz.title.length <= 65){
+        i++;
+    }else{
+        alert("Nome inválido! O nome do quizz deve ter no mínimo 20 e no máximo 65 caracteres.");
+    }
+    if (objQuizz.image.includes('.gif') || objQuizz.image.includes('.jpeg') && objQuizz.image.includes('https://')){
+        i++;
+    }else {
+        alert("Link inválido! O link deve conter uma imagem JPEG ou um GIF.");
+    }
+    if (objQuizz.questions.length >= 3){
+        i++
+    }else {
+        alert("Número de perguntas inválido! O número mínimo são 3 perguntas.");
+    }
+    if (objQuizz.levels.length >= 2){
+        i++
+    }else{
+        alert("Número de níveis inválido! O número mínimo são 2 níveis.");
+    }
+    if (i === 4){
+        abrirTela3_2();
+    }
+}
 
 
+//mudança de telas
 function abrirTela2(quizEscolhido) {
     const tela1 = document.querySelector(".tela-1");
     tela1.classList.add("off");
