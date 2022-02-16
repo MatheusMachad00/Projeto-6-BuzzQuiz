@@ -10,11 +10,14 @@ promessa.then(CriarEstruturaHTML);
 
 function CriarEstruturaHTML(respostaServidor) {
     console.log(respostaServidor);
-    const ul = document.querySelector("ul");
-    ul.innerHTML = "";
+    const section = document.querySelector("section");
+    section.innerHTML = "";
     for (i = 0; i < respostaServidor.data.length; i++){
-        ul.innerHTML += `<p>${respostaServidor.data[i].title}</p>
-         <img src="${respostaServidor.data[i].image}" alt="${respostaServidor.data[i].image}">`
+        section.innerHTML += `
+        <article onclick="abrirTela2(this)">
+            <img class="img-tela-1" src="${respostaServidor.data[i].image}" alt="${respostaServidor.data[i].image}">
+            <p class="titulo-quiz-tela-1">${respostaServidor.data[i].title}</p>
+        </article>`
      }
  }
 
@@ -28,6 +31,9 @@ function pegarQuizzesDoServidor() {
         
     });
 }; 
+
+
+
 
 
 
