@@ -35,7 +35,8 @@ header p {
 
 /* ---- CONTEUDO DA PAGINA (TELA 1) ----  */
 .tela-1 {
-    display: none;
+    display: flex;
+    flex-direction: column;
 }
 
 .seus-quizzes {
@@ -274,15 +275,206 @@ article .titulo-quiz-tela-1 {
 }
 
 /* ---- TELA 3.2 ---- */
+.tela-3-2 {
+    display: none;
+    flex-direction: column; 
+}
+
 .tela-3-2 span {
     font-weight: bold;
     font-size: 20px;
     line-height: 23px;
     display: flex;
     align-items: center;
+    justify-content: center;
     color: #000000;
 
     margin-top: 38px;
+}
+
+.perguntas {
+    display: flex;
+    flex-direction: column;
+}
+
+.pergunta-tela-3-2 {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.resposta-correta {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.resposta-incorreta {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.tela-3-2 input {
+    width: 341px;
+    height: 46px;
+    border: 1px solid #D1D1D1;
+    border-radius: 5px;
+}
+
+.tela-3-2 button {
+    margin-top: 70px;
+    width: 324px;
+    height: 54px;
+    background: var(--cor-vermelha);
+    border-radius: 15px;
+    border: none;
+
+    font-size: 18px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    color: #FFF5F4;
+}
+
+/* ---- TELA 3.3 ---- */
+.tela-3-3 {
+    display: none;
+    flex-direction: column; 
+}
+
+.tela-3-3 span {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 23px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000000;
+
+    margin-top: 38px;
+    margin-bottom: 10px;
+}
+
+.niveis {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+    width: 100vw;
+    height: 439px;
+}
+
+.nivel-tela-3-3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.tela-3-3 input {
+    width: 341px;
+    height: 46px;
+    border: 1px solid #D1D1D1;
+    border-radius: 5px;
+}
+
+.tela-3-3 .descricao {
+    width: 341px;
+    height: 177px;
+    border: 1px solid #D1D1D1;
+    border-radius: 5px; 
+}
+
+.tela-3-3 button {
+    display: flex;
+    margin: 70px auto;
+    width: 324px;
+    height: 54px;
+    background: var(--cor-vermelha);
+    border-radius: 15px;
+    border: none;
+
+    font-size: 18px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    color: #FFF5F4;
+}
+
+/* ---- TELA 3.4 ---- */
+.tela-3-4 {
+    display: none;
+    flex-direction: column;
+}
+
+.tela-3-4 span {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 23px;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    color: #000000;
+}
+
+.img-tela-finalizar {
+    width: 340px;
+    height: 181px;
+    border-radius: 5px;
+    position: absolute;
+    left: 40px;
+    top: 142px;
+}
+
+.texto-img-tela-finalizar {
+    position: relative;
+    top: 180px;
+    right: 50px;
+    font-size: 19px;
+    line-height: 22px;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.tela-3-4 button {
+    display: flex;
+    margin: 70px auto;
+    width: 324px;
+    height: 54px;
+    background: var(--cor-vermelha);
+    border-radius: 15px;
+    border: none;
+
+    font-size: 18px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    color: #FFF5F4;
+    position: absolute;
+    top: 280px;
+    right: 53px;
+}
+
+.voltar-home {
+    position: absolute;
+    right: 140px;
+    top: 400px;
+
+    font-size: 18px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #818181;
 }
 
 

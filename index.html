@@ -14,6 +14,7 @@
     <title>BuzzQuiz</title>
 </head>
 <body>
+<!-- <<<<<<< HEAD -->
     <!-- HEADER -->
     <header>
         <p>BuzzQuizz</p>
@@ -24,7 +25,7 @@
         <!-- SEUS QUIZZES -->
         <div class="seus-quizzes">
             <p>Você não criou nenhum quizz ainda :(</p>
-            <button>Criar Quizz</button>
+            <button onclick="abrirTela3()">Criar Quizz</button>
         </div>
 
         <span class="titulo-secao-tela-1">Todos os Quizzes</span>
@@ -120,27 +121,67 @@
             <input type="text" placeholder="Quantidade de perguntas do quizz">
             <input type="text" placeholder="Quantidade de níveis do quizzz">
         </div>
-        <button>Prosseguir pra criar perguntas</button>
+        <button onclick="abrirTela3_2()">Prosseguir pra criar perguntas</button>
     </main>
     
     <!-- --- CONTEUDO TELA 3.2 --- -->
     <main class="tela-3-2">
         <span>Crie suas perguntas</span>
-        <div class="perguntas">
-            <div class="pergunta">
 
+        <div class="perguntas">
+            <div class="pergunta-tela-3-2">
+                <span>Pergunta 1</span>
+                <input type="text" placeholder="Texto da pergunta">
+                <input type="text" placeholder="Cor de fundo da pergunta">                
+            </div>
+
+            <div class="resposta-correta">
+                <span>Resposta correta</span>
+                <input type="text" placeholder="Resposta correta">
+                <input type="text" placeholder="URL da imagem">
+            </div>
+
+            <div class="resposta-incorreta">
+                <span>Respostas incorretas</span>
+                <input type="text" placeholder="Resposta incorreta 1">
+                <input type="text" placeholder="URL da imagem 1">
             </div>
         </div>
 
+        <button onclick="abrirTela3_3()">Prosseguir pra criar níveis</button>
+    </main>
 
+    <!-- --- CONTEUDO TELA 3.3 --- -->
+    <main class="tela-3-3">
+        <span>Agora, decida os níveis!</span>
 
+        <div class="niveis">
+            <div class="nivel-tela-3-3">
+                <span>Nível 1</span>
+                <input type="text" placeholder="Título do nível">
+                <input type="text" placeholder="% de acerto mínima">                
+                <input type="text" placeholder="URL da imagem do nível">
+                <input class="descricao" type="text" placeholder="Descrição do nível">
+            </div>
+        </div>
+
+        <button onclick="abrirTela3_4()">Finalizar Quizz</button>
+    </main>
+
+    <!-- --- CONTEUDO TELA 3.4 --- -->
+    <main class="tela-3-4">
+        <span>Seu quizz está pronto!</span>
+        <div>
+            <img class="img-tela-finalizar" src="imgs/galaxias.jpg">
+            <p class="texto-img-tela-finalizar">O quão Potterhead é você?</p>
+        </div>
+        <button>Acessar Quizz</button>
+        <span onclick="voltarHome()" class="voltar-home">Voltar pra home</span>
     </main>
 
 
 </body>
 
-
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="./scripts/script.js"></script>
-
 </html>
