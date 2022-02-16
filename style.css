@@ -1,0 +1,295 @@
+* {
+    box-sizing: border-box;
+    --cor-fundo: #FAFAFA;
+    --cor-vermelha: #EC362D;
+}
+
+body {
+    width: 100vw;
+    font-family: 'Roboto', sans-serif;
+    background: var(--cor-fundo);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ---- HEADER ---- */
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 69px;
+    background: var(--cor-vermelha);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+header p {
+    font-weight: bold;
+    font-size: 37px;
+    color: #FFF;
+}
+
+/* ---- CONTEUDO DA PAGINA (TELA 1) ----  */
+.tela-1 {
+    display: none;
+}
+
+.seus-quizzes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   
+    height: 181px;
+    min-width: 340px;
+
+    margin: 32px auto 35px;
+    
+    border: 1px dashed #D5D5D5;
+    border-radius: 5px;
+}
+
+.seus-quizzes p {
+    width: 250px;
+    height: 107px;
+    
+    font-size: 20px;
+    line-height: 23.44px;
+    color: #B9B9B9;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.seus-quizzes button {
+    width: 151px;
+    height: 40px;
+    
+    /* ---- FONTE BOTÃO ---- */
+    font-size: 21px;
+    line-height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--cor-vermelha);
+
+    /* ---- ESTILO BOTÃO ---- */
+    border: 1px dashed var(--cor-vermelha);
+    border-radius: 50px;
+    background: var(--cor-fundo);
+}
+
+main .titulo-secao-tela-1 {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 23px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #000000;
+
+    margin-bottom: 14px;
+
+}
+
+.secao-tela-1 {
+    display: flex;
+    flex-direction: column;
+    gap: 142px;
+}
+
+.img-tela-1 {
+    min-width: 340px;
+    height: 181px;
+    border-radius: 5px;
+    position: absolute;
+}
+
+article .titulo-quiz-tela-1 {
+    position: relative;
+    top: 125px;
+    left: 10px;
+
+    width: 301px;
+    height: 54px;
+
+    font-size: 19px;
+    line-height: 22px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+/* ---- TELA 2 ---- */
+.tela-2 {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.img-header-tela-2 {
+    position: absolute;
+    width: 100vw;
+    height: 142px;
+    left: 0px;
+    top: 69px;
+}
+
+.texto-header-tela-2 {
+    position: relative;
+    width: 309px;
+    height: 54px;
+    left: 33px;
+    top: 44px;
+
+    font-style: normal;
+    font-weight: normal;
+    font-size: 19px;
+    line-height: 22px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.pergunta {
+    position: relative;
+    width: 100vw;
+    height: 436px;
+    left: 0px;
+    top: 85px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background: var(--cor-fundo);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+}
+
+.titulo-da-pergunta-tela-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 340px;
+    height: 89px;
+    background: #434CA0;
+    margin-top: 18px;
+}
+
+.texto-titulo-da-pergunta-tela-2 {
+    font-weight: bold;
+    font-size: 19px;
+    line-height: 22px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.alternativas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 340px;
+    gap: 14px;
+    margin-top: 13px;
+}
+
+.img-resposta {
+    width: 163px;
+    height: 113px;
+}
+
+.texto-resposta {
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 15px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+
+    margin-top: 4px;
+}
+
+/* ---- TELA 3 ---- */
+.tela-3 {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tela-3 span {
+    margin: 37px auto 29px auto;
+}
+
+.tela-3 .inputs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    width: 100vw;
+    height: 256px;
+    border: 1px solid rgba(223, 223, 223, 0.226);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);   
+}
+
+.tela-3 input {
+    width: 341px;
+    height: 46px;
+
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+.tela-3 button {
+    background-color: var(--cor-vermelha);
+    width: 324px;
+    height: 54px;
+    left: 24px;
+    top: 443px;
+    border: none;
+    border-radius: 15px;
+
+    font-size: 18px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    margin-top: 29px;
+
+    color: #FFF5F4;
+}
+
+/* ---- TELA 3.2 ---- */
+.tela-3-2 span {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 23px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+
+    margin-top: 38px;
+}
+
+
+.on {
+    display: flex;
+}
+
+.off {
+    display: none;
+}
