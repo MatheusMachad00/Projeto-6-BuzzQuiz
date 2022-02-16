@@ -4,15 +4,184 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+    <!-- LINK FONTE -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
     <title>BuzzQuiz</title>
 </head>
 <body>
-<ul>
+<!-- <<<<<<< HEAD -->
+    <!-- HEADER -->
+    <header>
+        <p>BuzzQuizz</p>
+    </header>
+
+    <!-- CONTEUDO DA PAGINA (TELA 1) -->
+    <main class="tela-1">
+        <!-- SEUS QUIZZES -->
+        <div class="seus-quizzes">
+            <p>Você não criou nenhum quizz ainda :(</p>
+            <button onclick="abrirTela3()">Criar Quizz</button>
+        </div>
+
+        <span class="titulo-secao-tela-1">Todos os Quizzes</span>
+        <section class="secao-tela-1">
+            <!-- --- EXEMPLO DE QUIZ APÓS O GET --- -->
+            <article onclick="abrirTela2(this)">
+                <img class="img-tela-1" src="imgs/Simp.jpg" alt="Imagem do Simpsons">
+                <p class="titulo-quiz-tela-1">Acerte os personagens corretos dos Simpsons e prove seu amor!</p>
+            </article>
+
+            <article onclick="abrirTela2(this)">
+                <img class="img-tela-1" src="imgs/Simp.jpg" alt="Imagem do Simpsons">
+                <p class="titulo-quiz-tela-1">Acerte os personagens corretos dos Simpsons e prove seu amor!</p>
+            </article>
+
+            <article onclick="abrirTela2(this)">
+                <img class="img-tela-1" src="imgs/Simp.jpg" alt="Imagem do Simpsons">
+                <p class="titulo-quiz-tela-1">Acerte os personagens corretos dos Simpsons e prove seu amor!</p>
+            </article>
+        </section>
+    </main>
+
+    <!-- CONTEUDO DA PAGINA AO CLICAR EM UM QUIZ (TELA 2) -->
+    <main class="tela-2">
+        <div class="header-tela-2">
+            <img class="img-header-tela-2" src="imgs/galaxias.jpg" alt="imagem teste">
+            <span class="texto-header-tela-2">O quão Potterhead é você?</span>
+        </div>
+
+        <section class="pergunta">
+            <div class="titulo-da-pergunta-tela-2">
+                <p class="texto-titulo-da-pergunta-tela-2">Em qual animal Olho-Tonto Moody transfigurou Malfoy?</p>
+            </div>
+
+            <div class="alternativas">
+                <div class="alternativa">
+                    <img class="img-resposta" src="imgs/image 3.svg" alt="imagem que corresponde a alternativa">
+                    <p class="texto-resposta">Gatíneo</p>
+                </div>
+
+                <div class="alternativa">
+                    <img class="img-resposta" src="imgs/image 3.svg" alt="imagem que corresponde a alternativa">
+                    <p class="texto-resposta">Gatíneo</p>
+                </div>
+
+                <div class="alternativa">
+                    <img class="img-resposta" src="imgs/image 3.svg" alt="imagem que corresponde a alternativa">
+                    <p class="texto-resposta">Gatíneo</p>
+                </div>
+
+                <div class="alternativa">
+                    <img class="img-resposta" src="imgs/image 3.svg" alt="imagem que corresponde a alternativa">
+                    <p class="texto-resposta">Gatíneo</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="pergunta">
+            <div class="titulo-da-pergunta-tela-2">
+                <p class="texto-titulo-da-pergunta-tela-2">Em qual animal Olho-Tonto Moody transfigurou Malfoy?</p>
+            </div>
+
+            <div class="alternativas">
+                <div class="alternativa">
+                    <img class="img-resposta" src="imgs/image 3.svg" alt="imagem que corresponde a alternativa">
+                    <p class="texto-resposta">Gatíneo</p>
+                </div>
+
+                <div class="alternativa">
+                    <img class="img-resposta" src="imgs/image 3.svg" alt="imagem que corresponde a alternativa">
+                    <p class="texto-resposta">Gatíneo</p>
+                </div>
+
+                <div class="alternativa">
+                    <img class="img-resposta" src="imgs/image 3.svg" alt="imagem que corresponde a alternativa">
+                    <p class="texto-resposta">Gatíneo</p>
+                </div>
+
+                <div class="alternativa">
+                    <img class="img-resposta" src="imgs/image 3.svg" alt="imagem que corresponde a alternativa">
+                    <p class="texto-resposta">Gatíneo</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- --- CONTEUDO TELA 3.1 --- -->
+    <main class="tela-3">
+        <span>Comece pelo começo</span>
+        <div class="inputs">
+            <input type="text" placeholder="Título do seu quizz">
+            <input type="text" placeholder="URL da imagem do seu quizz">
+            <input type="text" placeholder="Quantidade de perguntas do quizz">
+            <input type="text" placeholder="Quantidade de níveis do quizzz">
+        </div>
+        <button onclick="abrirTela3_2()">Prosseguir pra criar perguntas</button>
+    </main>
     
-</ul>
+    <!-- --- CONTEUDO TELA 3.2 --- -->
+    <main class="tela-3-2">
+        <span>Crie suas perguntas</span>
+
+        <div class="perguntas">
+            <div class="pergunta-tela-3-2">
+                <span>Pergunta 1</span>
+                <input type="text" placeholder="Texto da pergunta">
+                <input type="text" placeholder="Cor de fundo da pergunta">                
+            </div>
+
+            <div class="resposta-correta">
+                <span>Resposta correta</span>
+                <input type="text" placeholder="Resposta correta">
+                <input type="text" placeholder="URL da imagem">
+            </div>
+
+            <div class="resposta-incorreta">
+                <span>Respostas incorretas</span>
+                <input type="text" placeholder="Resposta incorreta 1">
+                <input type="text" placeholder="URL da imagem 1">
+            </div>
+        </div>
+
+        <button onclick="abrirTela3_3()">Prosseguir pra criar níveis</button>
+    </main>
+
+    <!-- --- CONTEUDO TELA 3.3 --- -->
+    <main class="tela-3-3">
+        <span>Agora, decida os níveis!</span>
+
+        <div class="niveis">
+            <div class="nivel-tela-3-3">
+                <span>Nível 1</span>
+                <input type="text" placeholder="Título do nível">
+                <input type="text" placeholder="% de acerto mínima">                
+                <input type="text" placeholder="URL da imagem do nível">
+                <input class="descricao" type="text" placeholder="Descrição do nível">
+            </div>
+        </div>
+
+        <button onclick="abrirTela3_4()">Finalizar Quizz</button>
+    </main>
+
+    <!-- --- CONTEUDO TELA 3.4 --- -->
+    <main class="tela-3-4">
+        <span>Seu quizz está pronto!</span>
+        <div>
+            <img class="img-tela-finalizar" src="imgs/galaxias.jpg">
+            <p class="texto-img-tela-finalizar">O quão Potterhead é você?</p>
+        </div>
+        <button>Acessar Quizz</button>
+        <span onclick="voltarHome()" class="voltar-home">Voltar pra home</span>
+    </main>
+
+
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="./scripts/script.js"></script>
-
 </html>
