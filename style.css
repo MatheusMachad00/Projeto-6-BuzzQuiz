@@ -406,6 +406,18 @@ article .titulo-quiz-tela-1 {
     color: #FFF5F4;
 }
 
+.iconeEditar {
+    font-size: 26px;
+    margin-top: 38px;
+    margin-bottom: 10px;
+}
+
+.nivelMinimizado {
+    display: flex;
+    justify-content: space-evenly;
+    
+}
+
 /* ---- TELA 3.4 ---- */
 .tela-3-4 {
     display: none;
