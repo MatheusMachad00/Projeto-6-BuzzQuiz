@@ -78,7 +78,7 @@
             <input id="qtdePerguntasQuizz" type="text" placeholder="Quantidade de perguntas do quizz">
             <input id="niveisQuizz" type="text" placeholder="Quantidade de níveis do quizzz">
         </div>
-        <button onclick="receberInput()">Prosseguir pra criar perguntas</button>
+        <button onclick="receberInputTela3_1()">Prosseguir pra criar perguntas</button>
     </main>
     
     <!-- --- CONTEUDO TELA 3.2 --- -->
@@ -115,14 +115,22 @@
         <div class="niveis">
             <div class="nivel-tela-3-3">
                 <span>Nível 1</span>
-                <input type="text" placeholder="Título do nível">
-                <input type="text" placeholder="% de acerto mínima">                
-                <input type="text" placeholder="URL da imagem do nível">
-                <input class="descricao" type="text" placeholder="Descrição do nível">
+                <input id="tituloDoNivel" type="text" placeholder="Título do nível">
+                <input id="acertoMinimo" type="text" placeholder="% de acerto mínima">                
+                <input id="imgDoNivel" type="text" placeholder="URL da imagem do nível">
+                <input id="descricaoDoNivel" class="descricao" type="text" placeholder="Descrição do nível">
+            </div>
+            <div class="nivelMinimizado">
+                <span>Nível 2</span>
+                <div class="iconeEditar"><ion-icon name="create-outline"></ion-icon></div>
+            </div>
+            <div class="nivelMinimizado">
+                <span>Nível 3</span>
+                <div class="iconeEditar"><ion-icon name="create-outline"></ion-icon></div>
             </div>
         </div>
 
-        <button onclick="abrirTela3_4()">Finalizar Quizz</button>
+        <button onclick="receberInputTela3_3 ()">Finalizar Quizz</button>
     </main>
 
     <!-- --- CONTEUDO TELA 3.4 --- -->
@@ -137,6 +145,8 @@
     </main>
 </body>
 
+<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="./scripts/script.js"></script>
+
 </html>
