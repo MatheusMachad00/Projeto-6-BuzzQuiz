@@ -128,7 +128,7 @@ article .titulo-quiz-tela-1 {
 
 /* ---- TELA 2 ---- */
 .tela-2 {
-    display: none;
+    display: flex;
     flex-direction: column;
     align-items: center;
     gap: 30px;
@@ -204,6 +204,10 @@ article .titulo-quiz-tela-1 {
     margin-top: 13px;
 }
 
+.alternativa {
+    opacity: 1;
+}
+
 .img-resposta {
     width: 163px;
     height: 113px;
@@ -220,9 +224,13 @@ article .titulo-quiz-tela-1 {
     margin-top: 4px;
 }
 
+/* .opacidade {
+    opacity: 0.9;
+} */
+
 /* ---- TELA 3 ---- */
 .tela-3 {
-    display: none;
+    display: flex;
     flex-direction: column;
     align-items: center;
 }
@@ -276,7 +284,7 @@ article .titulo-quiz-tela-1 {
 
 /* ---- TELA 3.2 ---- */
 .tela-3-2 {
-    display: none;
+    display: flex;
     flex-direction: column; 
 }
 
@@ -341,7 +349,7 @@ article .titulo-quiz-tela-1 {
 
 /* ---- TELA 3.3 ---- */
 .tela-3-3 {
-    display: none;
+    display: flex;
     flex-direction: column; 
 }
 
@@ -420,7 +428,7 @@ article .titulo-quiz-tela-1 {
 
 /* ---- TELA 3.4 ---- */
 .tela-3-4 {
-    display: none;
+    display: flex;
     flex-direction: column;
 }
 
@@ -487,11 +495,6 @@ article .titulo-quiz-tela-1 {
     text-align: center;
 
     color: #818181;
-}
-
-
-.on {
-    display: flex;
 }
 
 .off {
