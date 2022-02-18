@@ -93,36 +93,33 @@ function validacaoDeQuizzes(){
         const questions = document.querySelector(".perguntas");
         for(let i = 0; i < objQuizz.questions.length; i++) {
         questions.innerHTML += `
-        <div class="pergunta-tela-3-2">
+        <div class="pergunta-tela-3-2 teste">
             <span>Pergunta ${i+1}</span>
-            <input id="tituloPergunta" type="text" placeholder="Texto da pergunta">
-            <input id="corPergunta" type="text" placeholder="Cor de fundo da pergunta">                
+            <input class="tituloPerguntas" id="tituloPergunta" type="text" placeholder="Texto da pergunta">
+            <input class="corPerguntas" id="corPergunta" type="text" placeholder="Cor de fundo da pergunta">                
         </div>
 
         <div class="resposta-correta">
             <span>Resposta correta</span>
-            <input id="resposta" type="text" placeholder="Resposta correta">
-            <input id="imgResposta" type="text" placeholder="URL da imagem">
+            <input class="respostaCorreta" id="resposta" type="text" placeholder="Resposta correta">
+            <input class="imgRespostaCorreta" id="imgResposta" type="text" placeholder="URL da imagem">
         </div>
         
         <span>Respostas incorretas</span>
         <div class="resposta-incorreta">
-            <input id="resposta" type="text" placeholder="Resposta incorreta ${i+1}">
-            <input id="imgResposta" type="text" placeholder="URL da imagem ${i+1}">
+            <input class="respostaIncorreta0" id="respostaIncorreta" type="text" placeholder="Resposta incorreta 1">
+            <input class="imgRespostaIncorreta0" id="imgRespostaIncorreta" type="text" placeholder="URL da imagem 1">
+            <input class="respostaIncorreta1" id="respostaIncorreta" type="text" placeholder="Resposta incorreta 2">
+            <input class="imgRespostaIncorreta1" id="imgRespostaIncorreta" type="text" placeholder="URL da imagem 2">
+            <input class="respostaIncorreta2" id="respostaIncorreta" type="text" placeholder="Resposta incorreta 3">
+            <input class="imgRespostaIncorreta2" id="imgRespostaIncorreta" type="text" placeholder="URL da imagem 3">
         </div>`
         }
-
-        // TENTANDO REPETIR A RESPOSTA INCORRETA EM TODAS AS PERGUNTAS
-        const respostasIncorretas = document.querySelector(".resposta-incorreta");
-        for(let j = 0; j < objQuizz.questions.length - 2; j++){
-        respostasIncorretas.innerHTML += `
-        <input id="resposta" type="text" placeholder="Resposta incorreta ${j+2}">
-        <input id="imgResposta" type="text" placeholder="URL da imagem ${j+2}">
-        `    
-        }
-        // objQuizz.questions = [];
     }
+    console.log(objQuizz)
 }
+
+
 
 function validacaoCor(cor) {
     return /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/i.test(cor);
@@ -134,39 +131,98 @@ function validacaoURL(url) {
 
 // INCOMPLETO (COMO VALIDAR EM TODAS AS PERGUNTAS???)
 function validacaoPerguntas() {
-let tituloPergunta = document.getElementById('tituloPergunta').value;
-let corPergunta = document.getElementById("corPergunta").value;
-let resposta = document.getElementById("resposta").value;
-let imgResposta = document.getElementById("imgResposta").value;
+let tituloPerguntas = document.querySelectorAll(".tituloPerguntas");
+let coresPerguntas = document.querySelectorAll(".corPerguntas");
+let respostasCorretas = document.querySelectorAll(".respostaCorreta");
+let imgsRespostasCorretas = document.querySelectorAll(".imgRespostaCorreta");
+let respostasIncorretas0 = document.querySelectorAll(".respostaIncorreta0");
+let imgsRespostasIncorretas0 = document.querySelectorAll(".imgRespostaIncorreta0");
+let respostasIncorretas1 = document.querySelectorAll(".respostaIncorreta1");
+let imgsRespostasIncorretas1 = document.querySelectorAll(".imgRespostaIncorreta1");
+let respostasIncorretas2 = document.querySelectorAll(".respostaIncorreta2");
+let imgsRespostasIncorretas2 = document.querySelectorAll(".imgRespostaIncorreta2");
 
+let j = 0;
 
-let i = 0;
-    if (tituloPergunta.length >= 20) {
-        i++
+tituloPerguntas.forEach(tituloPergunta => {
+    if (tituloPergunta.value.length) {
+        j++
     }else{
         alert("O titulo da pergunta deve ter no minimo 20 caracteres!")
     }
+});
 
-    if (validacaoCor(corPergunta)) {
-        i++
+coresPerguntas.forEach(cor => {
+    if(validacaoCor(cor.value)){
+        j++
     }else{
         alert("A cor deve ser escrita em formato Hexadecimal.")
     }
+});
 
-    if (resposta !== ''){
-        i++
+respostasCorretas.forEach(respostaCorreta => {
+    if(respostaCorreta.value !== ''){
+        j++
     }else{
         alert("O texto da resposta não pode estar vazio!")
     }
-
-    if (validacaoURL(imgResposta)){
-        i++
+});
+imgsRespostasCorretas.forEach(imgRespostaCorreta => {
+    if(validacaoURL(imgRespostaCorreta.value)){
+        j++
     }else{
         alert("A imagem deve estar em link URL!")
     }
-    if (i === 4){
-        abrirTela3_3();
+});
+
+respostasIncorretas0.forEach(respostasIncorretas0 => {
+    if(respostasIncorretas0.value !== ''){
+        j++
+    }else{
+        alert("O texto da resposta não pode estar vazio!")
     }
+});
+imgsRespostasIncorretas0.forEach(imgsRespostasIncorretas0 => {
+    if(validacaoURL(imgsRespostasIncorretas0.value)){
+        j++
+    }else{
+        alert("A imagem deve estar em link URL!")
+    }
+});
+
+respostasIncorretas1.forEach(respostasIncorretas1 => {
+    if(respostasIncorretas1.value !== ''){
+        j++
+    }else{
+        alert("O texto da resposta não pode estar vazio!")
+    }
+});
+imgsRespostasIncorretas1.forEach(imgsRespostasIncorretas1 => {
+    if(validacaoURL(imgsRespostasIncorretas1.value)){
+        j++
+    }else{
+        alert("A imagem deve estar em link URL!")
+    }
+});
+
+respostasIncorretas2.forEach(respostasIncorretas2 => {
+    if(respostasIncorretas2.value !== ''){
+        j++
+    }else{
+        alert("O texto da resposta não pode estar vazio!")
+    }
+});
+imgsRespostasIncorretas2.forEach(imgsRespostasIncorretas2 => {
+    if(validacaoURL(imgsRespostasIncorretas2.value)){
+        j++
+    }else{
+        alert("A imagem deve estar em link URL!")
+    }
+});
+console.log(j)
+if( j === 10 * objQuizz.questions.length){
+    abrirTela3_3();
+}
 }
 
 
