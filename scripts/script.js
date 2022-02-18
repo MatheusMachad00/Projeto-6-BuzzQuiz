@@ -163,104 +163,111 @@ let imgsRespostasIncorretas2 = document.querySelectorAll(".imgRespostaIncorreta2
 
 let j = 0;
 
-// let objQuestions = {
-//     title: tituloPerguntas,
-//     color: coresPerguntas,
-//     answers: []
-// }
 for(i = 0; i < objQuizz.questions.length; i++){
     questions.push({answers: []});
 }
 
-
 tituloPerguntas.forEach((tituloPergunta, index) => {
-    if (tituloPergunta.value.length) {
-        j++
-        questions[index] = {...questions[index], title: tituloPergunta.value}
-    }else{
-        alert("O titulo da pergunta deve ter no minimo 20 caracteres!")
-    }
+if (tituloPergunta.value.length) {
+    j++
+    questions[index] = {...questions[index], title: tituloPergunta.value}
+} else {
+    alert("O titulo da pergunta deve ter no minimo 20 caracteres!")
+}
 });
 
 coresPerguntas.forEach((cor, index) => {
-    if(validacaoCor(cor.value)){
-        j++
-        questions[index] = {...questions[index], color: cor.value, answers: []}
-    }else{
-        alert("A cor deve ser escrita em formato Hexadecimal.")
-    }
+if(validacaoCor(cor.value)){
+    j++
+    questions[index] = {...questions[index], color: cor.value, answers: []}
+}else{
+    alert("A cor deve ser escrita em formato Hexadecimal.")
+}
 });
+
 respostasCorretas.forEach((respostaCorreta, index) => {
-    if(respostaCorreta.value !== ''){
-        j++
-        questions[index].answers.push({...questions[index].answers ,...questions[index]})
-    }else{
-        alert("O texto da resposta não pode estar vazio!")
-    }
+if(respostaCorreta.value !== ''){
+    j++
+    questions[index].answers.push({text: respostaCorreta.value, isCorrectAnswer: true})
+}else{
+    alert("O texto da resposta não pode estar vazio!")
+}
 });
 
-imgsRespostasCorretas.forEach(imgRespostaCorreta => {
-    if(validacaoURL(imgRespostaCorreta.value)){
-        j++
-    }else{
-        alert("A imagem deve estar em link URL!")
-    }
+imgsRespostasCorretas.forEach((imgRespostaCorreta, index) => {
+if(validacaoURL(imgRespostaCorreta.value)){
+    j++
+    questions[index].answers[0] = {...questions[index].answers[0], image: imgRespostaCorreta.value}
+}else{
+    alert("A imagem deve estar em link URL!")
+}
 });
 
-respostasIncorretas0.forEach(respostasIncorretas0 => {
-    if(respostasIncorretas0.value !== ''){
-        j++
-    }else{
-        alert("O texto da resposta não pode estar vazio!")
-    }
-});
-imgsRespostasIncorretas0.forEach(imgsRespostasIncorretas0 => {
-    if(validacaoURL(imgsRespostasIncorretas0.value)){
-        j++
-    }else{
-        alert("A imagem deve estar em link URL!")
-    }
+respostasIncorretas0.forEach((respostasIncorretas0, index) => {
+if(respostasIncorretas0.value !== ''){
+    j++
+    questions[index].answers.push({text: respostasIncorretas0.value, isCorrectAnswer: false})
+}else{
+    alert("O texto da resposta não pode estar vazio!")
+}
 });
 
-respostasIncorretas1.forEach(respostasIncorretas1 => {
-    if(respostasIncorretas1.value !== ''){
-        j++
-    }else{
-        alert("O texto da resposta não pode estar vazio!")
-    }
-});
-imgsRespostasIncorretas1.forEach(imgsRespostasIncorretas1 => {
-    if(validacaoURL(imgsRespostasIncorretas1.value)){
-        j++
-    }else{
-        alert("A imagem deve estar em link URL!")
-    }
+imgsRespostasIncorretas0.forEach((imgsRespostasIncorretas0, index) => {
+if(validacaoURL(imgsRespostasIncorretas0.value)){
+    j++
+    questions[index].answers[1] = {...questions[index].answers[1], image: imgsRespostasIncorretas0.value}
+}else{
+    alert("A imagem deve estar em link URL!")
+}
 });
 
-respostasIncorretas2.forEach(respostasIncorretas2 => {
-    if(respostasIncorretas2.value !== ''){
-        j++
-    }else{
-        alert("O texto da resposta não pode estar vazio!")
-    }
+respostasIncorretas1.forEach((respostasIncorretas1, index) => {
+if(respostasIncorretas1.value !== ''){
+    j++
+    questions[index].answers.push({text: respostasIncorretas1.value, isCorrectAnswer: false})
+}else{
+    alert("O texto da resposta não pode estar vazio!")
+}
 });
-imgsRespostasIncorretas2.forEach(imgsRespostasIncorretas2 => {
-    if(validacaoURL(imgsRespostasIncorretas2.value)){
-        j++
-    }else{
-        alert("A imagem deve estar em link URL!")
-    }
+
+imgsRespostasIncorretas1.forEach((imgsRespostasIncorretas1, index) => {
+if(validacaoURL(imgsRespostasIncorretas1.value)){
+    j++
+    questions[index].answers[2] = {...questions[index].answers[2], image: imgsRespostasIncorretas1.value}
+}else{
+    alert("A imagem deve estar em link URL!")
+}
 });
-// objQuizz.questions[0] = objQuestions;
-// console.log(objQuestions)
-console.log(questions)
+
+respostasIncorretas2.forEach((respostasIncorretas2, index) => {
+if(respostasIncorretas2.value !== ''){
+    j++
+    questions[index].answers.push({text: respostasIncorretas2.value, isCorrectAnswer: false})
+}else{
+    alert("O texto da resposta não pode estar vazio!")
+}
+});
+
+imgsRespostasIncorretas2.forEach((imgsRespostasIncorretas2, index) => {
+if(validacaoURL(imgsRespostasIncorretas2.value)){
+    j++
+    questions[index].answers[3] = {...questions[index].answers[3], image: imgsRespostasIncorretas2.value}
+}else{
+    alert("A imagem deve estar em link URL!")
+}
+});
+
 if( j === 10 * objQuizz.questions.length){
+    objQuizz = {...objQuizz, questions}
     abrirTela3_3();
+} else {
+    questions = [];
 }
+// console.log(questions)
 }
+
 
 //tela dos níveis (tela 3.3)
-
 function receberInputTela3_3 (){
     let tituloNivel = document.getElementById("tituloDoNivel").value;
     validacaoTituloNivel(tituloNivel);
@@ -281,6 +288,8 @@ function receberInputTela3_3 (){
         console.log(objNiveis);
         abrirTela3_4();
     }
+    // console.log(questions)
+    console.log(objQuizz)
 }
 
 let count = 0;
