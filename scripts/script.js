@@ -77,8 +77,8 @@ function receberInputTela3_1() {
     objQuizz.image = img;
     objQuizz.questions.length = qtdePerguntas;
     objQuizz.levels.length = niveis;
-    validacaoDeQuizzesTela3_1();
-    // abrirTela3_2();
+    //validacaoDeQuizzesTela3_1();
+    abrirTela3_2();
 }
 
 function validacaoDeQuizzesTela3_1(){
@@ -255,8 +255,9 @@ imgsRespostasIncorretas2.forEach(imgsRespostasIncorretas2 => {
 // console.log(objQuestions)
 console.log(questions)
 if( j === 10 * objQuizz.questions.length){
-    abrirTela3_3();
 }
+abrirTela3_3(); //LEMBRAR DE VOLTAR ESSA LINHA e a de baixo PARA DENTRO DO IF!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+gerarHTMLNiveis();
 }
 
 //tela dos níveis (tela 3.3)
@@ -279,7 +280,7 @@ function receberInputTela3_3 (){
     if (count >= 4){
         objQuizz.levels[0] = objNiveis; //criar uma variável para ser o índice 
         console.log(objNiveis);
-        abrirTela3_4();
+        //abrirTela3_4();
     }
 }
 
@@ -316,6 +317,23 @@ function validacaoDescricaoNivel(valorDescricaoDoNivel){
         alert("Descrição inválida! A descrição deve ter no mínimo 30 caracteres.");
     }
 }
+
+//gerar html dos níveis
+function gerarHTMLNiveis(){
+    const bloco = document.querySelector(".niveis");
+    bloco.innerHTML += "";
+    for (i = 0; i < objQuizz.levels.length; i++){
+        bloco.innerHTML += `<div class="nivel-tela-3-3">
+        <span>Nível ${i+1}</span>
+        <input id="tituloDoNivel" type="text" placeholder="Título do nível">
+        <input id="acertoMinimo" type="text" placeholder="% de acerto mínima">                
+        <input id="imgDoNivel" type="text" placeholder="URL da imagem do nível">
+        <input id="descricaoDoNivel" class="descricao" type="text" placeholder="Descrição do nível">
+    </div>`
+    }
+}
+
+/* --> Outras funções <-- */
 
 // //selecionando resposta tela 2
 function selecionarOpcao(opcao) {
@@ -369,4 +387,11 @@ function voltarHome() {
     const tela1 = document.querySelector(".tela-1");
     tela3_4.classList.add("off");
     tela1.classList.remove("off");
+}
+
+function escondeBotao(){
+    const botao = document.querySelector(".iconeEditar");
+    const inputs = document.querySelectorAll(".esconderNiveis");
+    botao.classList.add("esconderNiveis");
+    inputs.classList.remove("esconderNiveis");
 }

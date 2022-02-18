@@ -347,6 +347,10 @@ article .titulo-quiz-tela-1 {
     color: #FFF5F4;
 }
 
+.esconderNiveis {
+    display: hide;
+}
+
 /* ---- TELA 3.3 ---- */
 .tela-3-3 {
     display: flex;
