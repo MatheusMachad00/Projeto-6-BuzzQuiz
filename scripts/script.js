@@ -7,8 +7,7 @@ const promessa = axios.get(`${LINK_API}quizzes`);
 promessa.then(CriarEstruturaHTML);
 //criar função para o catch?
 
-//mudar a estrutura do html, essa estrutura é para testes
-
+//mudar a estrutura do html
 function CriarEstruturaHTML(respostaServidor) {
     // console.log(respostaServidor);
     const section = document.querySelector("section");
@@ -23,7 +22,6 @@ function CriarEstruturaHTML(respostaServidor) {
      }
  }
 //  tentando transformar o codigo acima em arrow function
-
 
 //Pegando os quizes do servidor e imprimindo
 function pegarQuizzesDoServidor() {
@@ -52,6 +50,8 @@ let objQuizz = {
     questions: [],
     levels: []
 };
+
+let questions = [];
 
 function receberInput (){
     let titulo = document.getElementById("tituloQuizz").value;
@@ -116,7 +116,6 @@ function validacaoDeQuizzes(){
         </div>`
         }
     }
-    console.log(objQuizz)
 }
 
 
@@ -129,7 +128,7 @@ function validacaoURL(url) {
     return /^(https?|ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test(url);
 }
 
-// INCOMPLETO (COMO VALIDAR EM TODAS AS PERGUNTAS???)
+// INCOMPLETO (COMO CRIAR O OBJETO???)
 function validacaoPerguntas() {
 let tituloPerguntas = document.querySelectorAll(".tituloPerguntas");
 let coresPerguntas = document.querySelectorAll(".corPerguntas");
@@ -144,29 +143,42 @@ let imgsRespostasIncorretas2 = document.querySelectorAll(".imgRespostaIncorreta2
 
 let j = 0;
 
-tituloPerguntas.forEach(tituloPergunta => {
+// let objQuestions = {
+//     title: tituloPerguntas,
+//     color: coresPerguntas,
+//     answers: []
+// }
+for(i = 0; i < objQuizz.questions.length; i++){
+    questions.push({answers: []});
+}
+
+
+tituloPerguntas.forEach((tituloPergunta, index) => {
     if (tituloPergunta.value.length) {
         j++
+        questions[index] = {...questions[index], title: tituloPergunta.value}
     }else{
         alert("O titulo da pergunta deve ter no minimo 20 caracteres!")
     }
 });
 
-coresPerguntas.forEach(cor => {
+coresPerguntas.forEach((cor, index) => {
     if(validacaoCor(cor.value)){
         j++
+        questions[index] = {...questions[index], color: cor.value, answers: []}
     }else{
         alert("A cor deve ser escrita em formato Hexadecimal.")
     }
 });
-
-respostasCorretas.forEach(respostaCorreta => {
+respostasCorretas.forEach((respostaCorreta, index) => {
     if(respostaCorreta.value !== ''){
         j++
+        questions[index].answers.push({...questions[index].answers ,...questions[index]})
     }else{
         alert("O texto da resposta não pode estar vazio!")
     }
 });
+
 imgsRespostasCorretas.forEach(imgRespostaCorreta => {
     if(validacaoURL(imgRespostaCorreta.value)){
         j++
@@ -219,7 +231,9 @@ imgsRespostasIncorretas2.forEach(imgsRespostasIncorretas2 => {
         alert("A imagem deve estar em link URL!")
     }
 });
-console.log(j)
+// objQuizz.questions[0] = objQuestions;
+// console.log(objQuestions)
+console.log(questions)
 if( j === 10 * objQuizz.questions.length){
     abrirTela3_3();
 }
@@ -233,7 +247,7 @@ if( j === 10 * objQuizz.questions.length){
 // //selecionando resposta tela 2
 function selecionarOpcao(opcao) {
     opcao.style.opacity = "0.3"
-    // console.log(opcao)
+    
 }
 
 //mudança de telas
