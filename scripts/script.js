@@ -9,14 +9,12 @@ promessa.then(CriarEstruturaHTML);
 
 //mudar a estrutura do html
 function CriarEstruturaHTML(respostaServidor) {
-    // console.log(respostaServidor);
     const section = document.querySelector("section");
     section.innerHTML = "";
     for (i = 0; i < respostaServidor.data.length; i++){
-        id++
         section.innerHTML += `
-        <article id="${id}" onclick="abrirTela2(this)">
-            <img class="img-tela-1" src="${respostaServidor.data[i].image}" alt="${respostaServidor.data[i].image}">
+        <article onclick="abrirTela2(this)">
+            <img class="img-tela-1" src="${respostaServidor.data[i].image}" alt="${respostaServidor.data[i].title}">
             <p class="titulo-quiz-tela-1">${respostaServidor.data[i].title}</p>
         </article>`
     }
@@ -34,19 +32,6 @@ function pegarQuizzesDoServidor() {
 
 window.onload = pegarQuizzesDoServidor();
 
-//mudar a estrutura do html
-function CriarEstruturaHTML(respostaServidor) {
-    //console.log(respostaServidor);
-    const section = document.querySelector("section");
-    section.innerHTML = "";
-    for (i = 0; i < respostaServidor.data.length; i++) {
-        section.innerHTML += `
-        <article onclick="abrirTela2(this)">
-        <img class="img-tela-1" src="${respostaServidor.data[i].image}" alt="${respostaServidor.data[i].image}">
-        <p class="titulo-quiz-tela-1">${respostaServidor.data[i].title}</p>
-        </article>`
-    }
-}
 // INCOMPLETO
 function acessarQuizz() {
     let promessa = axios.get(`${LINK_API}quizzes/${id}`);
@@ -78,7 +63,6 @@ function receberInputTela3_1() {
     objQuizz.questions.length = qtdePerguntas;
     objQuizz.levels.length = niveis;
     validacaoDeQuizzesTela3_1();
-    // abrirTela3_2();
 }
 
 function validacaoDeQuizzesTela3_1(){
@@ -260,11 +244,13 @@ if(validacaoURL(imgsRespostasIncorretas2.value)){
 if( j === 10 * objQuizz.questions.length){
     objQuizz = {...objQuizz, questions}
     abrirTela3_3();
+    gerarHTMLNiveis();
 } else {
     questions = [];
 }
-// console.log(questions)
 }
+
+
 
 
 //tela dos níveis (tela 3.3)
@@ -288,7 +274,6 @@ function receberInputTela3_3 (){
         console.log(objNiveis);
         abrirTela3_4();
     }
-    // console.log(questions)
     console.log(objQuizz)
 }
 
@@ -325,6 +310,23 @@ function validacaoDescricaoNivel(valorDescricaoDoNivel){
         alert("Descrição inválida! A descrição deve ter no mínimo 30 caracteres.");
     }
 }
+
+//gerar html dos níveis
+function gerarHTMLNiveis(){
+    const bloco = document.querySelector(".niveis");
+    bloco.innerHTML += "";
+    for (i = 0; i < objQuizz.levels.length; i++){
+        bloco.innerHTML += `<div class="nivel-tela-3-3">
+        <span>Nível ${i+1}</span>
+        <input id="tituloDoNivel" type="text" placeholder="Título do nível">
+        <input id="acertoMinimo" type="text" placeholder="% de acerto mínima">                
+        <input id="imgDoNivel" type="text" placeholder="URL da imagem do nível">
+        <input id="descricaoDoNivel" class="descricao" type="text" placeholder="Descrição do nível">
+    </div>`
+    }
+}
+
+/* --> Outras funções <-- */
 
 // //selecionando resposta tela 2
 function selecionarOpcao(opcao) {
@@ -378,4 +380,11 @@ function voltarHome() {
     const tela1 = document.querySelector(".tela-1");
     tela3_4.classList.add("off");
     tela1.classList.remove("off");
+}
+
+function escondeBotao(){
+    const botao = document.querySelector(".iconeEditar");
+    const inputs = document.querySelectorAll(".esconderNiveis");
+    botao.classList.add("esconderNiveis");
+    inputs.classList.remove("esconderNiveis");
 }
