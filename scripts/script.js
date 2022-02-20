@@ -8,16 +8,15 @@ let objQuizz = {
     levels: []
 };
 let questions = [];
-let arrayNiveis = [];
 
 /* Pegando os quizes do servidor e imprimindo */
 const promessa = axios.get(`${LINK_API}quizzes`);
-promessa.then(CriarEstruturaHTML);
+promessa.then(criarEstruturaHTML);
 promessa.catch();
 
 //mudar a estrutura do html
-function CriarEstruturaHTML(respostaServidor) {
-    console.log(respostaServidor);
+function criarEstruturaHTML(respostaServidor) {
+    //console.log(respostaServidor);
     const section = document.querySelector("section");
     section.innerHTML += "";
     for (i = 0; i < respostaServidor.data.length; i++) {
@@ -29,8 +28,6 @@ function CriarEstruturaHTML(respostaServidor) {
         </article>`
     }
 }
-
-window.onload = pegarQuizzesDoServidor();
 
 //entrando nos quizzes 
 /* function acessarQuizz(id) {
@@ -72,7 +69,7 @@ function gerarHTMLDasPerguntas(){
         corTitulo = element.color;
         respostas = element.answers;
         //document.querySelector(".perguntas").innerHTML += 
-} */
+} 
 
 
 function gerarHTMLDoQuizzServidor(respostaServidor) {
@@ -84,7 +81,7 @@ function gerarHTMLDoQuizzServidor(respostaServidor) {
     const main = document.querySelector("main");
     main.innerHTML += "";
 
-}
+} */
 
 //criação de quizzes
 function receberInputTela3_1() {
@@ -339,13 +336,12 @@ function receberInputTela3_3() {
         }
     });
     if (v1 === true && v2 === true && v3 === true & v4 === true) {
-        //arrayNiveis.push(dadosNiveis);
-        //console.log(arrayNiveis);
         objQuizz.levels = [...dadosNiveis];
-        console.log(objQuizz);
         abrirTela3_4();
+        enviarQuizzCriadoAoServidor();
+        //console.log(objQuizz);
     }
-    console.log(dadosNiveis);
+    //console.log(dadosNiveis);
     //return dadosNiveis;
 }
 
@@ -362,6 +358,41 @@ function gerarHTMLNiveis() {
         <input class="descricaoDoNivel" class="descricao" type="text" placeholder="Descrição do nível">
     </div>`
     }
+}
+
+/* Enviar o quizz criado ao servidor */
+
+let quizzDoUsuario, idDoQuizz;
+
+function enviarQuizzCriadoAoServidor (){
+    const enviarQuizz = axios.post(`${LINK_API}quizzes`, objQuizz);
+    enviarQuizz.then(resposta => {
+        quizzDoUsuario = resposta.data;
+        idDoQuizz = resposta.data.id;
+        salvarQuizzDoUsuario(quizzDoUsuario, idDoQuizz);
+        pegarQuizzesDoUsuario ();
+		console.log(resposta);
+        console.log(quizzDoUsuario);
+        console.log(idDoQuizz);
+	});
+}
+
+/* Local data storage */
+function salvarQuizzDoUsuario (quizz, id){
+    let quizzUsuario = JSON.stringify(quizz);
+	localStorage.setItem(`${id}`, quizzUsuario);
+}
+
+let quizzesDoUsuario = [];
+
+function pegarQuizzesDoUsuario (){
+    for (i = 0; i < localStorage.length; i++){
+        let idDoQuizzDoUsuario = localStorage.key(i);
+        let quizzSerializado = localStorage.getItem(idDoQuizzDoUsuario);
+        let quizzDeserializado = JSON.parse(quizzSerializado);
+        quizzDoUsuario = [...quizzDeserializado];
+    }
+    console.log(quizzDoUsuario);
 }
 
 /* --> Outras funções <-- */
@@ -425,4 +456,8 @@ function escondeBotao() {
     const inputs = document.querySelectorAll(".esconderNiveis");
     botao.classList.add("esconderNiveis");
     inputs.classList.remove("esconderNiveis");
+}
+
+function randomizarArray() {
+    return Math.random() - 0.5;
 }
