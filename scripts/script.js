@@ -8,6 +8,7 @@ let objQuizz = {
     levels: []
 };
 let questions = [];
+let arrayNiveis = [];
 
 /* Pegando os quizes do servidor e imprimindo */
 const promessa = axios.get(`${LINK_API}quizzes`);
@@ -18,12 +19,12 @@ promessa.catch();
 function CriarEstruturaHTML(respostaServidor) {
     console.log(respostaServidor);
     const section = document.querySelector("section");
-    section.innerHTML = "";
+    section.innerHTML += "";
     for (i = 0; i < respostaServidor.data.length; i++) {
-        id++
+        //id++
         section.innerHTML += `
-        <article id="${id}" onclick="abrirTela2(this)">
-            <img class="img-tela-1" src="${respostaServidor.data[i].image}" alt="${respostaServidor.data[i].image}">
+        <article onclick="abrirTela2(this)">
+            <img class="img-tela-1" src="${respostaServidor.data[i].image}" alt="${respostaServidor.data[i].title}">
             <p class="titulo-quiz-tela-1">${respostaServidor.data[i].title}</p>
         </article>`
     }
@@ -31,25 +32,18 @@ function CriarEstruturaHTML(respostaServidor) {
 
 window.onload = pegarQuizzesDoServidor();
 
-//gerar estrutura dos quizzes na página principal
-function CriarEstruturaHTML(respostaServidor) {
-    console.log(respostaServidor);
-    const section = document.querySelector("section");
-    section.innerHTML = "";
-    for (i = 0; i < respostaServidor.data.length; i++) {
-        section.innerHTML += `
-        <article onclick="abrirTela2(this)">
-        <img class="img-tela-1" src="${respostaServidor.data[i].image}" alt="${respostaServidor.data[i].image}">
-        <p class="titulo-quiz-tela-1">${respostaServidor.data[i].title}</p>
-        </article>`
-    }
-}
-
 //entrando nos quizzes 
 /* function acessarQuizz(id) {
     idDoQuizz = id;
     const promise = axios.get(`${LINK_API}${idDoQuizz}`);
     promise.then(obterPerguntas);
+// INCOMPLETO
+function acessarQuizz() {
+    let promessa = axios.get(`${LINK_API}quizzes/${id}`);
+    promessa.then(respostaServidor => {
+        // console.log(respostaServidor.data);
+    });
+
 }
 
 let objQuizzServidor = [];
@@ -103,7 +97,6 @@ function receberInputTela3_1() {
     objQuizz.questions.length = qtdePerguntas;
     objQuizz.levels.length = niveis;
     validacaoDeQuizzesTela3_1(); //se a validação tiver desativada o html da tela 3.2 não será ativado
-    abrirTela3_2();
 }
 
 function validacaoDeQuizzesTela3_1() {
@@ -114,7 +107,7 @@ function validacaoDeQuizzesTela3_1() {
     } else {
         alert("Nome inválido! O nome do quizz deve ter no mínimo 20 e no máximo 65 caracteres.");
         v1 = false;
-    }objQuizz.image.value
+    } objQuizz.image.value
     if (objQuizz.image.includes('.gif') || objQuizz.image.includes('.jpeg') || objQuizz.image.includes('.jpg') || objQuizz.image.includes('.png') && objQuizz.image.includes('https://')) {
         v2 = true;
     } else {
@@ -134,7 +127,7 @@ function validacaoDeQuizzesTela3_1() {
         v4 = false;
     }
     if (v1 === true && v2 === true && v3 === true && v4 === true) {
-        //abrirTela3_2();
+        abrirTela3_2();
         criarHTMLPerguntas();
     }
 }
@@ -192,15 +185,9 @@ function validacaoPerguntas() {
 
     let j = 0;
 
-    // let objQuestions = {
-    //     title: tituloPerguntas,
-    //     color: coresPerguntas,
-    //     answers: []
-    // }
     for (i = 0; i < objQuizz.questions.length; i++) {
         questions.push({ answers: [] });
     }
-
 
     tituloPerguntas.forEach((tituloPergunta, index) => {
         if (tituloPergunta.value.length) {
@@ -219,88 +206,89 @@ function validacaoPerguntas() {
             alert("A cor deve ser escrita em formato Hexadecimal.")
         }
     });
+
     respostasCorretas.forEach((respostaCorreta, index) => {
         if (respostaCorreta.value !== '') {
             j++
-            questions[index].answers.push({ ...questions[index].answers, ...questions[index] })
+            questions[index].answers.push({ text: respostaCorreta.value, isCorrectAnswer: true })
         } else {
             alert("O texto da resposta não pode estar vazio!")
         }
     });
 
-    imgsRespostasCorretas.forEach(imgRespostaCorreta => {
+    imgsRespostasCorretas.forEach((imgRespostaCorreta, index) => {
         if (validacaoURL(imgRespostaCorreta.value)) {
             j++
+            questions[index].answers[0] = { ...questions[index].answers[0], image: imgRespostaCorreta.value }
         } else {
             alert("A imagem deve estar em link URL!")
         }
     });
 
-    respostasIncorretas0.forEach(respostasIncorretas0 => {
+    respostasIncorretas0.forEach((respostasIncorretas0, index) => {
         if (respostasIncorretas0.value !== '') {
             j++
+            questions[index].answers.push({ text: respostasIncorretas0.value, isCorrectAnswer: false })
         } else {
             alert("O texto da resposta não pode estar vazio!")
         }
     });
-    imgsRespostasIncorretas0.forEach(imgsRespostasIncorretas0 => {
+
+    imgsRespostasIncorretas0.forEach((imgsRespostasIncorretas0, index) => {
         if (validacaoURL(imgsRespostasIncorretas0.value)) {
             j++
+            questions[index].answers[1] = { ...questions[index].answers[1], image: imgsRespostasIncorretas0.value }
         } else {
             alert("A imagem deve estar em link URL!")
         }
     });
 
-    respostasIncorretas1.forEach(respostasIncorretas1 => {
+    respostasIncorretas1.forEach((respostasIncorretas1, index) => {
         if (respostasIncorretas1.value !== '') {
             j++
+            questions[index].answers.push({ text: respostasIncorretas1.value, isCorrectAnswer: false })
         } else {
             alert("O texto da resposta não pode estar vazio!")
         }
     });
-    imgsRespostasIncorretas1.forEach(imgsRespostasIncorretas1 => {
+
+    imgsRespostasIncorretas1.forEach((imgsRespostasIncorretas1, index) => {
         if (validacaoURL(imgsRespostasIncorretas1.value)) {
             j++
+            questions[index].answers[2] = { ...questions[index].answers[2], image: imgsRespostasIncorretas1.value }
         } else {
             alert("A imagem deve estar em link URL!")
         }
     });
 
-    respostasIncorretas2.forEach(respostasIncorretas2 => {
+    respostasIncorretas2.forEach((respostasIncorretas2, index) => {
         if (respostasIncorretas2.value !== '') {
             j++
+            questions[index].answers.push({ text: respostasIncorretas2.value, isCorrectAnswer: false })
         } else {
             alert("O texto da resposta não pode estar vazio!")
         }
     });
-    imgsRespostasIncorretas2.forEach(imgsRespostasIncorretas2 => {
+
+    imgsRespostasIncorretas2.forEach((imgsRespostasIncorretas2, index) => {
         if (validacaoURL(imgsRespostasIncorretas2.value)) {
             j++
+            questions[index].answers[3] = { ...questions[index].answers[3], image: imgsRespostasIncorretas2.value }
         } else {
             alert("A imagem deve estar em link URL!")
         }
     });
-    // objQuizz.questions[0] = objQuestions;
-    // console.log(objQuestions)
-    console.log(questions)
+
     if (j === 10 * objQuizz.questions.length) {
-        abrirTela3_3(); //LEMBRAR DE VOLTAR ESSA LINHA e a de baixo PARA DENTRO DO IF!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        objQuizz = { ...objQuizz, questions }
+        abrirTela3_3();
         gerarHTMLNiveis();
+    } else {
+        questions = [];
     }
 }
 
-//tela dos níveis (tela 3.3)
-
-/* 
-
-validacaoTituloNivel(dadosNiveis.title);
-    validacaoAcertoNivel(dadosNiveis.minValue);
-    validacaoImgNivel(dadosNiveis.image);
-    validacaoDescricaoNivel(dadosNiveis.text);
-
-
-*/
-
+//let arrayNiveis = [];
 
 function receberInputTela3_3() {
     let v1, v2, v3, v4;
@@ -315,7 +303,7 @@ function receberInputTela3_3() {
     });
 
     dadosNiveis.forEach((tituloNivel) => {
-        console.log(tituloNivel.title);
+        //console.log(tituloNivel.title);
         if (tituloNivel.title.length >= 10) {
             v1 = true;
         } else {
@@ -328,7 +316,7 @@ function receberInputTela3_3() {
         if (imgNivel.image.includes('.gif') || imgNivel.image.includes('.jpeg') || imgNivel.image.includes('.jpg') || imgNivel.image.includes('.png') && imgNivel.image.includes('https://')) {
             v2 = true;
         } else {
-            alert("A imagem deve ser uma URL válida!");
+            alert("A imagem deve ter uma URL válida!");
             v2 = false;
         }
     });
@@ -350,13 +338,15 @@ function receberInputTela3_3() {
             v4 = false;
         }
     });
-    if (v1 === true && v2 === true && v3 === true & v4 === true){
-        objQuizz.levels.push(dadosNiveis);
-        //console.log(objQuizz);
+    if (v1 === true && v2 === true && v3 === true & v4 === true) {
+        //arrayNiveis.push(dadosNiveis);
+        //console.log(arrayNiveis);
+        objQuizz.levels = [...dadosNiveis];
+        console.log(objQuizz);
         abrirTela3_4();
     }
-    //console.log(dadosNiveis);
-    return dadosNiveis;
+    console.log(dadosNiveis);
+    //return dadosNiveis;
 }
 
 //gerar html dos níveis
