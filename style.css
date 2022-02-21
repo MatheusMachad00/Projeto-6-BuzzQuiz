@@ -39,6 +39,28 @@ header p {
     flex-direction: column;
 }
 
+.seus {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+h1 {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 23px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #000000;
+}
+
+.add-quiz {
+    font-size: 30px;
+    color: #EC362D;
+}
+
 .seus-quizzes {
     display: flex;
     flex-direction: column;
@@ -47,7 +69,7 @@ header p {
     height: 181px;
     min-width: 340px;
 
-    margin: 32px auto 35px;
+    margin: auto auto 35px;
     
     border: 1px dashed #D5D5D5;
     border-radius: 5px;
@@ -104,7 +126,7 @@ main .titulo-secao-tela-1 {
 }
 
 .img-tela-1 {
-    min-width: 340px;
+    width: 340px;
     height: 181px;
     border-radius: 5px;
     position: absolute;
@@ -180,8 +202,7 @@ article .titulo-quiz-tela-1 {
     justify-content: center;
     align-items: center;
     width: 340px;
-    height: 89px;
-    background: #434CA0;
+    min-height: 89px;
     margin-top: 18px;
 }
 
@@ -219,8 +240,10 @@ article .titulo-quiz-tela-1 {
     line-height: 15px;
     display: flex;
     align-items: center;
+    text-align: center;
+    justify-content: center;
     color: #000000;
-
+    width: 163px;
     margin-top: 4px;
 }
 
@@ -306,6 +329,21 @@ article .titulo-quiz-tela-1 {
     color: #000000;
 
     margin-top: 38px;
+    margin-bottom: 10px;
+}
+
+
+
+.topo-pergunta {
+    display: flex;
+    justify-content: space-between;
+}
+
+.botao-encolher {
+    width: 26px;
+    height: 23px;
+    display: flex;
+    margin-top: auto;
 }
 
 .perguntas {
@@ -314,6 +352,12 @@ article .titulo-quiz-tela-1 {
 }
 
 .pergunta-tela-3-2 {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.texto-e-cor-pergunta {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -329,6 +373,10 @@ article .titulo-quiz-tela-1 {
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+.span-resposta-incorreta {
+    margin-bottom: 10px;
 }
 
 .tela-3-2 input {
@@ -458,7 +506,6 @@ article .titulo-quiz-tela-1 {
     width: 340px;
     height: 181px;
     border-radius: 5px;
-    position: absolute;
     left: 40px;
     top: 142px;
 }
@@ -490,20 +537,14 @@ article .titulo-quiz-tela-1 {
     text-align: center;
     justify-content: center;
     color: #FFF5F4;
-    position: absolute;
-    top: 280px;
-    right: 53px;
 }
 
 .voltar-home {
-    position: absolute;
-    right: 140px;
-    top: 400px;
-
     font-size: 18px;
     line-height: 21px;
     display: flex;
     align-items: center;
+    justify-content: center;
     text-align: center;
 
     color: #818181;

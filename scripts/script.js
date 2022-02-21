@@ -97,26 +97,34 @@ function criarHTMLPerguntas() {
     for (let i = 0; i < objQuizz.questions.length; i++) {
         questions.innerHTML += `
     <div class="pergunta-tela-3-2 teste">
-        <span>Pergunta ${i + 1}</span>
-        <input class="tituloPerguntas" id="tituloPergunta" type="text" placeholder="Texto da pergunta">
-        <input class="corPerguntas" id="corPergunta" type="text" placeholder="Cor de fundo da pergunta">                
+        <div class="topo-pergunta">
+            <span>Pergunta ${i + 1}</span>
+            <img onclick="encolherPergunta(this)" class="botao-encolher" src="imgs/Vector.svg">
+        </div>           
     </div>
+        <div class="conteudo-encolher">    
+            <div class="texto-e-cor-pergunta">    
+                <input class="tituloPerguntas" id="tituloPergunta" type="text" placeholder="Texto da pergunta">
+                <input class="corPerguntas" id="corPergunta" type="text" placeholder="Cor de fundo da pergunta">  
+            </div>
 
-    <div class="resposta-correta">
-        <span>Resposta correta</span>
-        <input class="respostaCorreta" id="resposta" type="text" placeholder="Resposta correta">
-        <input class="imgRespostaCorreta" id="imgResposta" type="text" placeholder="URL da imagem">
-    </div>
-    
-    <span>Respostas incorretas</span>
-    <div class="resposta-incorreta">
-        <input class="respostaIncorreta0" id="respostaIncorreta" type="text" placeholder="Resposta incorreta 1">
-        <input class="imgRespostaIncorreta0" id="imgRespostaIncorreta" type="text" placeholder="URL da imagem 1">
-        <input class="respostaIncorreta1" id="respostaIncorreta" type="text" placeholder="Resposta incorreta 2">
-        <input class="imgRespostaIncorreta1" id="imgRespostaIncorreta" type="text" placeholder="URL da imagem 2">
-        <input class="respostaIncorreta2" id="respostaIncorreta" type="text" placeholder="Resposta incorreta 3">
-        <input class="imgRespostaIncorreta2" id="imgRespostaIncorreta" type="text" placeholder="URL da imagem 3">
-    </div>`
+            <div class="resposta-correta">
+                <span>Resposta correta</span>
+                <input class="respostaCorreta" id="resposta" type="text" placeholder="Resposta correta">
+                <input class="imgRespostaCorreta" id="imgResposta" type="text" placeholder="URL da imagem">
+            </div>
+            
+            <span class="span-resposta-incorreta">Respostas incorretas</span>
+            <div class="resposta-incorreta">
+                <input class="respostaIncorreta0" id="respostaIncorreta" type="text" placeholder="Resposta incorreta 1">
+                <input class="imgRespostaIncorreta0" id="imgRespostaIncorreta" type="text" placeholder="URL da imagem 1">
+                <input class="respostaIncorreta1" id="respostaIncorreta" type="text" placeholder="Resposta incorreta 2">
+                <input class="imgRespostaIncorreta1" id="imgRespostaIncorreta" type="text" placeholder="URL da imagem 2">
+                <input class="respostaIncorreta2" id="respostaIncorreta" type="text" placeholder="Resposta incorreta 3">
+                <input class="imgRespostaIncorreta2" id="imgRespostaIncorreta" type="text" placeholder="URL da imagem 3">
+            </div>
+        </div>    
+    `
     }
 }
 
@@ -331,7 +339,7 @@ function enviarQuizzCriadoAoServidor (){
     enviarQuizz.then(resposta => {
         quizzDoUsuario = resposta.data;
         idDoQuizz = resposta.data.id;
-        salvarQuizzDoUsuario(quizzDoUsuario, idDoQuizz);
+        salvarQuizzDoUsuario(quizzDoUsuario);
         pegarQuizzesDoUsuario ();
 		console.log(resposta);
         console.log(quizzDoUsuario);
@@ -340,9 +348,10 @@ function enviarQuizzCriadoAoServidor (){
 }
 
 /* Local data storage */
-function salvarQuizzDoUsuario (quizz, id){
-    let quizzUsuario = JSON.stringify(quizz);
-	localStorage.setItem(`${id}`, quizzUsuario);
+function salvarQuizzDoUsuario (quizz){
+    const quizzUsuario = JSON.stringify(quizz);
+	localStorage.setItem(quizz.data.id.toString(), quizzUsuario);
+    loadLocalStorage();
 }
 
 let quizzesDoUsuario = [];
@@ -402,7 +411,7 @@ function gerarQuestionTela2() {
     quizQuestions.innerHTML = "";
     questions.forEach(question => {
         quizQuestions.innerHTML += `
-        <div class="titulo-da-pergunta-tela-2">
+        <div style="background-color: ${question.color}" class="titulo-da-pergunta-tela-2">
                 <p class="texto-titulo-da-pergunta-tela-2">${question.title}</p>
         </div>
         
@@ -441,6 +450,12 @@ function abrirTela3_2() {
     const tela3_2 = document.querySelector(".tela-3-2");
     tela3.classList.add("off");
     tela3_2.classList.remove("off")
+}
+
+function encolherPergunta(perguntaEscolhida) {
+    const pergunta = document.querySelector(".conteudo-encolher")
+    pergunta.classList.toggle("off")
+    
 }
 
 function abrirTela3_3() {
