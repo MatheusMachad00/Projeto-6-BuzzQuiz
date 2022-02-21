@@ -1,6 +1,7 @@
 //  Variáveis de controle 
 const LINK_API = "https://mock-api.driven.com.br/api/v4/buzzquizz/";
 let id = null;
+let infos;
 
 /* Pegando os quizes do servidor e imprimindo */
 const promessa = axios.get(`${LINK_API}quizzes`);
@@ -13,7 +14,7 @@ function CriarEstruturaHTML(respostaServidor) {
     section.innerHTML = "";
     for (i = 0; i < respostaServidor.data.length; i++){
         section.innerHTML += `
-        <article onclick="abrirTela2(this)">
+        <article onclick="acessarQuizz(this)" id="${respostaServidor.data[i].id}">
             <img class="img-tela-1" src="${respostaServidor.data[i].image}" alt="${respostaServidor.data[i].title}">
             <p class="titulo-quiz-tela-1">${respostaServidor.data[i].title}</p>
         </article>`
@@ -33,11 +34,13 @@ function pegarQuizzesDoServidor() {
 window.onload = pegarQuizzesDoServidor();
 
 // INCOMPLETO
-function acessarQuizz() {
-    let promessa = axios.get(`${LINK_API}quizzes/${id}`);
-    promessa.then(respostaServidor => {
-        // console.log(respostaServidor.data);
-    });
+function acessarQuizz(quizEscolhido) {
+    id = quizEscolhido.id;
+    console.log(id)
+    console.log(quizEscolhido)
+
+    const quiz = axios.get(`https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${id}`);
+    quiz.then(abrirTela2);
 }
 
 window.onload = pegarQuizzesDoServidor();
@@ -250,9 +253,6 @@ if( j === 10 * objQuizz.questions.length){
 }
 }
 
-
-
-
 //tela dos níveis (tela 3.3)
 function receberInputTela3_3 (){
     let tituloNivel = document.getElementById("tituloDoNivel").value;
@@ -330,20 +330,73 @@ function gerarHTMLNiveis(){
 
 // //selecionando resposta tela 2
 function selecionarOpcao(opcao) {
-    opcao.style.opacity = "0.3"
-    
+    console.log(opcao)
+    let alternativasTela2 = document.querySelectorAll(".alternativa");
+    alternativasTela2.forEach(alternativaTela2 => {
+        alternativaTela2.classList.add("opacidade")
+    });
+
+    opcao.style.opacity = "1"
 }
 
 //mudança de telas
 
-function abrirTela2(quizEscolhido) {
+function abrirTela2(quiz) {
+    infos = quiz.data;
+    console.log(quiz)
+    console.log(infos)
     const tela1 = document.querySelector(".tela-1");
     const tela2 = document.querySelector(".tela-2");
     tela1.classList.add("off");
     tela2.classList.remove("off");
 
-    // console.log(quizEscolhido);
-    acessarQuizz();
+    gerarHeaderTela2()
+    gerarQuestionTela2()
+}
+
+function gerarHeaderTela2() {
+    const header = document.querySelector(".container-header-tela-2");
+    header.innerHTML += `
+    <div class="header-tela-2">
+        <img class="img-header-tela-2" src="${infos.image}">
+        <span class="texto-header-tela-2">${infos.title}</span>
+    </div>
+    `
+}
+
+function gerarQuestionTela2() {
+    let i = 0;
+    const questions = infos.questions;
+    const quizQuestions = document.querySelector(".pergunta");
+    quizQuestions.innerHTML = "";
+    questions.forEach(question => {
+        quizQuestions.innerHTML += `
+        <div class="titulo-da-pergunta-tela-2">
+                <p class="texto-titulo-da-pergunta-tela-2">${question.title}</p>
+        </div>
+        
+        <div class="alternativas">
+            ${gerarRespostas(question)}
+        </div>
+    `});
+    
+}
+
+function gerarRespostas(question) {
+    const respostasSemModificacao = question.answers;
+    const respostas = respostasSemModificacao.sort(() => Math.random() - 0.5);
+    console.log(respostas);
+    let quizRespostas = "";
+    respostas.forEach(resposta => {
+        quizRespostas += `
+        <div class="alternativa" onclick="selecionarOpcao(this)">
+            <img class="img-resposta" src="${resposta.image}">
+            <p class="texto-resposta">${resposta.text}</p>
+        </div>
+        `
+    });
+    console.log(quizRespostas);
+    return quizRespostas;
 }
 
 function abrirTela3() {
@@ -376,10 +429,7 @@ function abrirTela3_4() {
 }
 
 function voltarHome() {
-    const tela3_4 = document.querySelector(".tela-3-4");
-    const tela1 = document.querySelector(".tela-1");
-    tela3_4.classList.add("off");
-    tela1.classList.remove("off");
+    window.location.reload(true);
 }
 
 function escondeBotao(){

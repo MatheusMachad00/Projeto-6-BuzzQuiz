@@ -172,7 +172,7 @@ article .titulo-quiz-tela-1 {
     align-items: center;
 
     background: var(--cor-fundo);
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+    /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05); */
 }
 
 .titulo-da-pergunta-tela-2 {
@@ -224,9 +224,17 @@ article .titulo-quiz-tela-1 {
     margin-top: 4px;
 }
 
-/* .opacidade {
-    opacity: 0.9;
-} */
+.opacidade {
+    opacity: 0.3;
+}
+
+.cor-alternativa-correta {
+    color: #009C22;
+}
+
+.cor-alternativa-errada {
+    color: #FF4B4B;
+}
 
 /* ---- TELA 3 ---- */
 .tela-3 {
