@@ -55,6 +55,7 @@ function receberInputTela3_1() {
     objQuizz.questions.length = qtdePerguntas;
     objQuizz.levels.length = niveis;
     validacaoDeQuizzesTela3_1(); //se a validação tiver desativada o html da tela 3.2 não será ativado
+    //abrirTela3_2;
 }
 
 function validacaoDeQuizzesTela3_1() {
@@ -301,6 +302,7 @@ function receberInputTela3_3() {
         objQuizz.levels = [...dadosNiveis];
         abrirTela3_4();
         enviarQuizzCriadoAoServidor();
+        mostrarQuizzTela3_4();
         // console.log(objQuizz);
     }
     //console.log(dadosNiveis);
@@ -339,10 +341,22 @@ function enviarQuizzCriadoAoServidor (){
 	});
 }
 
+function mostrarQuizzTela3_4 (){
+    const quizz = document.querySelector(".tela-3-4");
+    quizz.innerHTML += "";
+    quizz.innerHTML += `<div class="box"><span>Seu quizz está pronto!</span>
+    <div>
+        <img class="img-tela-finalizar" src="${objQuizz.image}" alt="${objQuizz.image}">
+        <p class="texto-img-tela-finalizar">${objQuizz.title}</p>
+    </div></div>`;
+}
+
 /* Local data storage */
 function salvarQuizzDoUsuario (quizz, id){
     let quizzUsuario = JSON.stringify(quizz);
 	localStorage.setItem(`${id}`, quizzUsuario);
+    console.log(quizz);
+    console.log(id);
 }
 
 let quizzesDoUsuario = [];
@@ -352,9 +366,17 @@ function pegarQuizzesDoUsuario (){
         let idDoQuizzDoUsuario = localStorage.key(i);
         let quizzSerializado = localStorage.getItem(idDoQuizzDoUsuario);
         let quizzDeserializado = JSON.parse(quizzSerializado);
-        quizzDoUsuario = [...quizzDeserializado];
-    }
-    console.log(quizzDoUsuario);
+        quizzesDoUsuario = [{...quizzDeserializado}];
+    }  
+}
+
+function mostrarQuizzesDoUsuario() {
+    const quizzesUsuario = document.querySelector(".seus-quizzes");
+    quizzUsuario += "";
+    quizzUsuario += `<article onclick="acessarQuizz(this)" id="${respostaServidor.data[i].id}">
+    <img class="img-tela-1" src="${respostaServidor.data[i].image}" alt="${respostaServidor.data[i].title}">
+    <p class="titulo-quiz-tela-1">${respostaServidor.data[i].title}</p>
+</article>`;
 }
 
 /* --> Outras funções <-- */
