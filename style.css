@@ -489,7 +489,13 @@ article .titulo-quiz-tela-1 {
 /* ---- TELA 3.4 ---- */
 .tela-3-4 {
     display: flex;
+}
+
+.tela-3-4 box{
+    display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .tela-3-4 span {
